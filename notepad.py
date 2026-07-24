@@ -1,25 +1,35 @@
-import pygame
-pygame.init()
+import tkinter as tk
 
-WIDTH, HEIGHT = 800, 600
+root = tk.Tk()
+root.title("Notepad")
 
-WHITE = (255,255,255)
+def new_file():
+    print("New File")
 
-screan = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("NotePad")
+def open_file():
+    print("Open File")
 
-clock = pygame.time.Clock()
+def save_file():
+    print("Save File")
 
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+def save_as():
+    print("Save As")
 
-    screan.fill(WHITE)
+# Create the menu bar
+menubar = tk.Menu(root)
 
-    pygame.display.flip()
+# Create the File menu
+file_menu = tk.Menu(menubar, tearoff=0)
+file_menu.add_command(label="New File", command=new_file)
+file_menu.add_command(label="Open File", command=open_file)
+file_menu.add_separator()
+file_menu.add_command(label="Save", command=save_file)
+file_menu.add_command(label="Save As", command=save_as)
 
-    clock.tick(60)
+# Add "File" to the menu bar
+menubar.add_cascade(label="File", menu=file_menu)
 
-pygame.quit()
+# Display the menu bar
+root.config(menu=menubar)
+
+root.mainloop()
